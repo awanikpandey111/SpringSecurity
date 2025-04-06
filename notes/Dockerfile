@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy everything
 COPY . .
 
+# Fix: Give Maven wrapper permission
+RUN chmod +x mvnw
+
 # Build the project using the Maven wrapper (mvnw)
 RUN ./mvnw clean package -DskipTests
 

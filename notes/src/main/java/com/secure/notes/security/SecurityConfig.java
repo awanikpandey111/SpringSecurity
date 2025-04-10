@@ -57,10 +57,11 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf ->
-                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/auth/public/**")
-        );
+//        http.csrf(csrf ->
+//                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                        .ignoringRequestMatchers("/api/auth/public/**")
+//        );.
+    	http.csrf(csrf -> csrf.disable());
         //http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests((requests)
                 -> requests
@@ -141,7 +142,7 @@ public class SecurityConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         // Allow specific origins
         corsConfig.setAllowedOrigins(Arrays.asList(frontendUrl));
-     
+        
         // Allow specific HTTP methods
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // Allow specific headers
